@@ -24,6 +24,7 @@
 <body>
 <h3><a href="index.html">Home</a></h3>
 <h2>Meals</h2>
+<a href="mealForm.jsp"a>Add Meal</a><br><br>
 <c:if test="${empty mealWithExceedList}">
 There no Meals
 </c:if>
@@ -36,10 +37,13 @@ There no Meals
         <c:if test="${meal.exceed == false}">
             <tr style="color: green">
         </c:if>
+            <td>${meal.id}</td>
             <c:set var="dateTime" value="${fn:replace(meal.dateTime, 'T', ' ')}" />
             <td>${dateTime}</td>
             <td>${meal.description}</td>
             <td id="td01">${meal.calories}</td>
+            <td><a href="/topjava/meals?action=edit&id=${meal.id}">Edit</a></td>
+            <td><a href="/topjava/meals?action=delete&id=${meal.id}">Delete</a></td>
         </tr>
     </c:forEach>
 </table>
