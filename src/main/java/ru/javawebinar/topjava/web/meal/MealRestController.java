@@ -12,6 +12,7 @@ import ru.javawebinar.topjava.util.exception.NotFoundException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import static ru.javawebinar.topjava.util.MealsUtil.*;
@@ -45,8 +46,9 @@ public class MealRestController {
     }
 
     public List<MealWithExceed> getFilteredByTime(LocalDate startDate, LocalTime startTime, LocalDate endDate, LocalTime endTime) {
-        return getFilteredWithExceeded(service.getAll(AuthorizedUser.id()),
-                LocalDateTime.of(startDate, startTime).toLocalTime(),
-                LocalDateTime.of(endDate, endTime).toLocalTime(), DEFAULT_CALORIES_PER_DAY);
+        List<Meal> meals = (List<Meal>) service.getFilteredByTime(LocalDateTime.of(startDate, startTime).toLocalTime(),
+                LocalDateTime.of(endDate, endTime).toLocalTime(), AuthorizedUser.id());
+
+        return createWitnExceeded(meals, DEFAULT_CALORIES_PER_DAY);
     }
 }
