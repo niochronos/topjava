@@ -31,7 +31,7 @@ CREATE TABLE meals
 (
   user_id       INTEGER NOT NULL,
   id            INTEGER PRIMARY KEY DEFAULT nextval('global_meal_seq'),
-  dateTime      TIMESTAMP DEFAULT now(),
+  date_time     TIMESTAMP DEFAULT now(),
   description   VARCHAR NOT NULL,
   calories      INTEGER NOT NULL,
   FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
