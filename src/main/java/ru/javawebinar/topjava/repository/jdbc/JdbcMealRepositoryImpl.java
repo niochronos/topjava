@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.repository.MealRepository;
+import ru.javawebinar.topjava.util.ValidationUtil;
 
 import javax.sql.DataSource;
 import java.time.LocalDateTime;
@@ -47,9 +48,10 @@ public class JdbcMealRepositoryImpl implements MealRepository {
             meal.setId(newKey.intValue());
         }
         else {
-            namedParameterJdbcTemplate.update(
+            int numberRowsAffected = namedParameterJdbcTemplate.update(
                         "UPDATE meals SET date_time=:dateTime, description=:description," +
                             "calories=:calories WHERE id=:id AND user_id=:user_id", map);
+            ValidationUtil.checkNotFound((numberRowsAffected > 0), meal.toString());
         }
 
         return meal;
@@ -73,7 +75,7 @@ public class JdbcMealRepositoryImpl implements MealRepository {
 
     @Override
     public List<Meal> getBetween(LocalDateTime startDate, LocalDateTime endDate, int userId) {
-        return jdbcTemplate.query("SELECT * FROM meals WHERE date_time BETWEEN ? AND ?",
-                ROW_MAPPER, startDate, endDate);
+        return jdbcTemplate.query("SELECT * FROM meals WHERE user_id=? AND date_time BETWEEN ? AND ? ORDER BY date_time DESC",
+                ROW_MAPPER, userId, startDate, endDate);
     }
 }
