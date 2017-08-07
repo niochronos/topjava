@@ -37,6 +37,7 @@ import static ru.javawebinar.topjava.UserTestData.USER_ID;
 @RunWith(SpringJUnit4ClassRunner.class)
 @Sql(scripts = "classpath:db/populateDB.sql", config = @SqlConfig(encoding = "UTF-8"))
 public class MealServiceTest {
+
     private static final Logger log = getLogger(MealServiceTest.class);
     private static final List<String> WATCHED_LOG_LIST = new ArrayList<>();
 
