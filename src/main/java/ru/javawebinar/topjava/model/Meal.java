@@ -11,11 +11,11 @@ import java.time.LocalTime;
 
 @NamedQueries({
         @NamedQuery(name = Meal.DELETE, query = "DELETE FROM Meal m WHERE m.id=:id AND m.user.id=:user_id"),
-        @NamedQuery(name = Meal.GET, query = "SELECT m FROM Meal m LEFT JOIN FETCH m.user " +
+        @NamedQuery(name = Meal.GET, query = "SELECT m FROM Meal m " +
                 "WHERE m.id=:id AND m.user.id=:user_id"),
-        @NamedQuery(name = Meal.ALL_SORTED_BY_DATE, query = "SELECT m FROM Meal m LEFT JOIN FETCH m.user " +
+        @NamedQuery(name = Meal.ALL_SORTED_BY_DATE, query = "SELECT m FROM Meal m " +
                 "WHERE m.user.id=:user_id ORDER BY m.dateTime DESC"),
-        @NamedQuery(name = Meal.GET_BETWEEN, query = "SELECT m FROM Meal m LEFT JOIN FETCH m.user " +
+        @NamedQuery(name = Meal.GET_BETWEEN, query = "SELECT m FROM Meal m " +
                 "WHERE m.user.id=:user_id AND m.dateTime BETWEEN ?1 AND ?2 ORDER BY m.dateTime DESC")
 })
 @Entity
@@ -40,6 +40,7 @@ public class Meal extends BaseEntity {
     private int calories;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @NotNull
     private User user;
 
     public Meal() {
