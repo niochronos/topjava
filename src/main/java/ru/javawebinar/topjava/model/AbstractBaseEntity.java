@@ -1,7 +1,13 @@
 package ru.javawebinar.topjava.model;
 
+import org.hibernate.Hibernate;
+
 import javax.persistence.*;
 
+/**
+ * Do not manipulate new (transient) entries in HashSet/HashMap without overriding hashCode
+ * http://stackoverflow.com/questions/5031614
+ */
 @MappedSuperclass
 
 // http://stackoverflow.com/questions/594597/hibernate-annotations-which-is-better-field-or-property-access
@@ -12,7 +18,9 @@ public abstract class AbstractBaseEntity {
     @Id
     @SequenceGenerator(name = "global_seq", sequenceName = "global_seq", allocationSize = 1, initialValue = START_SEQ)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "global_seq")
-    protected Integer id;
+    // PROPERTY access for id due to bug: https://hibernate.atlassian.net/browse/HHH-3718
+    @Access(value = AccessType.PROPERTY)
+    private Integer id;
 
     protected AbstractBaseEntity() {
     }
@@ -43,15 +51,15 @@ public abstract class AbstractBaseEntity {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (o == null || !getClass().equals(Hibernate.getClass(o))) {
             return false;
         }
         AbstractBaseEntity that = (AbstractBaseEntity) o;
-        return id != null && id.equals(that.id);
+        return getId() != null && getId().equals(that.getId());
     }
 
     @Override
     public int hashCode() {
-        return id == null ? 0 : id;
+        return (getId() == null) ? 0 : getId();
     }
 }
