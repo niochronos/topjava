@@ -37,7 +37,7 @@ public class UserServiceTest {
     private UserService service;
 
     @Test
-    public void testSave() throws Exception {
+    public void testCreate() throws Exception {
         User newUser = new User(null, "New", "new@gmail.com", "newPass", 1555, false, Collections.singleton(Role.ROLE_USER));
         User created = service.create(newUser);
         newUser.setId(created.getId());
@@ -45,7 +45,7 @@ public class UserServiceTest {
     }
 
     @Test(expected = DataAccessException.class)
-    public void testDuplicateMailSave() throws Exception {
+    public void testDuplicateMailCreate() throws Exception {
         service.create(new User(null, "Duplicate", "user@yandex.ru", "newPass", Role.ROLE_USER));
     }
 

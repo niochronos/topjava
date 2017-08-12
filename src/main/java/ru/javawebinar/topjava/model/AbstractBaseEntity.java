@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 // http://stackoverflow.com/questions/594597/hibernate-annotations-which-is-better-field-or-property-access
 @Access(AccessType.FIELD)
-public class BaseEntity {
+public abstract class AbstractBaseEntity {
     public static final int START_SEQ = 100000;
 
     @Id
@@ -14,10 +14,10 @@ public class BaseEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "global_seq")
     protected Integer id;
 
-    protected BaseEntity() {
+    protected AbstractBaseEntity() {
     }
 
-    protected BaseEntity(Integer id) {
+    protected AbstractBaseEntity(Integer id) {
         this.id = id;
     }
 
@@ -46,7 +46,7 @@ public class BaseEntity {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        BaseEntity that = (BaseEntity) o;
+        AbstractBaseEntity that = (AbstractBaseEntity) o;
         return id != null && id.equals(that.id);
     }
 

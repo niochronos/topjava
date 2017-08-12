@@ -6,7 +6,7 @@ import ru.javawebinar.topjava.model.User;
 
 import java.util.Objects;
 
-import static ru.javawebinar.topjava.model.BaseEntity.START_SEQ;
+import static ru.javawebinar.topjava.model.AbstractBaseEntity.START_SEQ;
 
 public class UserTestData {
     public static final int USER_ID = START_SEQ;

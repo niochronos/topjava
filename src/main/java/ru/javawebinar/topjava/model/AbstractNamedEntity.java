@@ -7,16 +7,16 @@ import javax.persistence.MappedSuperclass;
 
 
 @MappedSuperclass
-public class NamedEntity extends BaseEntity {
+public abstract class AbstractNamedEntity extends AbstractBaseEntity {
 
     @NotBlank
     @Column(name = "name", nullable = false)
     protected String name;
 
-    public NamedEntity() {
+    public AbstractNamedEntity() {
     }
 
-    protected NamedEntity(Integer id, String name) {
+    protected AbstractNamedEntity(Integer id, String name) {
         super(id);
         this.name = name;
     }
