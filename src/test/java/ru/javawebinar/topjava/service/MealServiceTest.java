@@ -34,7 +34,7 @@ import static ru.javawebinar.topjava.UserTestData.USER_ID;
 @RunWith(SpringRunner.class)
 @Sql(scripts = "classpath:db/populateDB.sql", config = @SqlConfig(encoding = "UTF-8"))
 public class MealServiceTest {
-    private static final Logger log = getLogger(MealServiceTest.class);
+    private static final Logger resultLog = getLogger("result");
 
     private static StringBuilder results = new StringBuilder();
 
@@ -48,7 +48,7 @@ public class MealServiceTest {
         protected void finished(long nanos, Description description) {
             String result = String.format("%-25s %7d", description.getMethodName(), TimeUnit.NANOSECONDS.toMillis(nanos));
             results.append(result).append('\n');
-            log.info(result + " ms\n");
+            resultLog.info(result + " ms\n");
         }
     };
 
@@ -59,7 +59,7 @@ public class MealServiceTest {
 
     @AfterClass
     public static void printResult() {
-        log.info("\n---------------------------------" +
+        resultLog.info("\n---------------------------------" +
                 "\nTest                 Duration, ms" +
                 "\n---------------------------------\n" +
                 results +
