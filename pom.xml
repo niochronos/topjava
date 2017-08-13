@@ -33,6 +33,9 @@
         <hibernate.version>5.2.10.Final</hibernate.version>
         <hibernate-validator.version>5.4.1.Final</hibernate-validator.version>
         <javax-el.version>3.0.1-b08</javax-el.version>
+
+        <!--Tools-->
+        <ehcache.version>2.10.4</ehcache.version>
     </properties>
 
     <build>
@@ -92,7 +95,7 @@
         <!-- Spring -->
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
+            <artifactId>spring-context-support</artifactId>
             <exclusions>
                 <exclusion>
                     <groupId>commons-logging</groupId>
@@ -124,6 +127,12 @@
             <artifactId>javax.el</artifactId>
             <version>${javax-el.version}</version>
             <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+            <version>${ehcache.version}</version>
         </dependency>
 
         <!--Web-->
