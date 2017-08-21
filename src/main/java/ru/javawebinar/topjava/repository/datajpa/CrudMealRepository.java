@@ -15,13 +15,17 @@ import java.util.List;
 public interface CrudMealRepository extends JpaRepository<Meal, Integer> {
 
     @Transactional
-    int deleteByIdAndUserId(int id, int userId);
+//    int deleteByIdAndUserId(int id, int userId);
+    @Modifying
+    @Query("DELETE FROM Meal m WHERE m.id=:id AND m.user.id=:userId")
+    int delete(@Param("id") int id, @Param("userId") int userId);
 
     @Transactional
     @Override
     Meal save(Meal meal);
 
-    Meal findOneByIdAndUserId(int id, int userId);
+    @Override
+    Meal findOne(Integer id);
 
     List<Meal> findAllByUserIdOrderByDateTimeDesc(int userId);
 
