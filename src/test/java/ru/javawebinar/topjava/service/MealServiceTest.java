@@ -37,7 +37,7 @@ import static ru.javawebinar.topjava.UserTestData.USER_ID;
 @Sql(scripts = "classpath:db/populateDB.sql", config = @SqlConfig(encoding = "UTF-8"))
 @ActiveProfiles(resolver = ActiveDbProfileResolver.class)
 public class MealServiceTest {
-    private static final Logger resultLog = getLogger("result");
+    private static final Logger log = getLogger("result");
 
     private static StringBuilder results = new StringBuilder();
 
@@ -51,7 +51,7 @@ public class MealServiceTest {
         protected void finished(long nanos, Description description) {
             String result = String.format("%-25s %7d", description.getMethodName(), TimeUnit.NANOSECONDS.toMillis(nanos));
             results.append(result).append('\n');
-            resultLog.info(result + " ms\n");
+            log.info(result + " ms\n");
         }
     };
 
@@ -62,7 +62,7 @@ public class MealServiceTest {
 
     @AfterClass
     public static void printResult() {
-        resultLog.info("\n---------------------------------" +
+        log.info("\n---------------------------------" +
                 "\nTest                 Duration, ms" +
                 "\n---------------------------------\n" +
                 results +
