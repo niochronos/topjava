@@ -21,4 +21,6 @@ public interface UserService {
     void evictCache();
 
     List<User> getAll();
+
+    User getWithMeals(int id);
 }
