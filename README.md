@@ -2,6 +2,8 @@ Java Enterprise Online Project
 ===============================
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/13f904852d0b436298a94c9fd84b602b)](https://www.codacy.com/app/niochronos/topjava?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=niochronos/topjava&amp;utm_campaign=Badge_Grade)
 
+[![Build Status](https://travis-ci.org/niochronos/topjava.svg?branch=master)](https://travis-ci.org/niochronos/topjava)
+
 [![Dependency Status](https://www.versioneye.com/user/projects/59bae182368b08002ef3066d/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/59bae182368b08002ef3066d)
 
 Разработка полнофункционального Spring/JPA Enterprise приложения c авторизацией и правами доступа на основе ролей с использованием наиболее популярных инструментов и технологий Java: Maven, Spring MVC, Security, JPA(Hibernate), REST(Jackson), Bootstrap (css,js), datatables, jQuery + plugins, Java 8 Stream and Time API и хранением в базах данных Postgresql и HSQLDB.
