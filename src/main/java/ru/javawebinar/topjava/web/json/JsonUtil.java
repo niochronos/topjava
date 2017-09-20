@@ -27,6 +27,10 @@ public class JsonUtil {
         }
     }
 
+    public static <T> String writeArray(T... array) {
+        return writeValue(array);
+    }
+
     public static <T> String writeValue(T obj) {
         try {
             return getMapper().writeValueAsString(obj);

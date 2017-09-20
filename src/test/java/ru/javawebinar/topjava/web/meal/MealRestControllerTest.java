@@ -75,7 +75,7 @@ public class MealRestControllerTest extends AbstractControllerTest {
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(MATCHER_WITH_EXCEED.contentListMatcher(MealsUtil.getWithExceeded(MEALS, USER.getCaloriesPerDay())));
+                .andExpect(content().json(JsonUtil.writeValue(MealsUtil.getWithExceeded(MEALS, USER.getCaloriesPerDay()))));
     }
 
     @Test
@@ -83,8 +83,8 @@ public class MealRestControllerTest extends AbstractControllerTest {
         mockMvc.perform(get(REST_URL + "between?startDateTime=2015-05-30T07:00&endDateTime=2015-05-31T11:00:00"))
                 .andExpect(status().isOk())
                 .andDo(print())
-                .andExpect(MATCHER_WITH_EXCEED.contentListMatcher(
+                .andExpect(content().json(JsonUtil.writeArray(
                         MealsUtil.createWithExceed(MEAL4, true),
-                        MealsUtil.createWithExceed(MEAL1, false)));
+                        MealsUtil.createWithExceed(MEAL1, false))));
     }
 }
