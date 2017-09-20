@@ -14,7 +14,6 @@ import ru.javawebinar.topjava.web.json.JsonUtil;
 import java.time.LocalDateTime;
 import java.util.*;
 
-import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -53,7 +52,7 @@ public class MealRestControllerTest extends AbstractControllerTest {
         TestUtil.print(mockMvc.perform(get(REST_URL))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(MATCHER_MWE.contentListMatcher(MealsUtil.getWithExceeded(MEALS,
+                .andExpect(MATCHER_WITH_EXCEED.contentListMatcher(MealsUtil.getWithExceeded(MEALS,
                                                             MealsUtil.DEFAULT_CALORIES_PER_DAY))));
     }
 
@@ -94,7 +93,7 @@ public class MealRestControllerTest extends AbstractControllerTest {
                 "&endTime=" + MEAL1.getTime()))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(MATCHER_MWE.contentListMatcher(MealsUtil
+                .andExpect(MATCHER_WITH_EXCEED.contentListMatcher(MealsUtil
                         .getWithExceeded(Collections.singleton(MEAL1), MealsUtil.DEFAULT_CALORIES_PER_DAY)));
     }
 
