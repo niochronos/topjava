@@ -36,7 +36,7 @@ abstract public class AbstractControllerTest {
         CHARACTER_ENCODING_FILTER.setForceEncoding(true);
     }
 
-    @Autowired
+    @Autowired(required = false)
     private JpaUtil jpaUtil;
 
     protected MockMvc mockMvc;
@@ -58,6 +58,8 @@ abstract public class AbstractControllerTest {
     @Before
     public void setUp() {
         userService.evictCache();
-        jpaUtil.clear2ndLevelHibernateCache();
+        if (jpaUtil != null) {
+            jpaUtil.clear2ndLevelHibernateCache();
+        }
     }
 }
