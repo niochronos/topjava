@@ -40,6 +40,7 @@ function updateTable() {
 
 function save() {
     var form = $("#detailsForm");
+    debugger;
     $.ajax({
         type: "POST",
         url: ajaxUrl,
