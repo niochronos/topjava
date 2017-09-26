@@ -20,7 +20,7 @@
         <spring.version>4.3.10.RELEASE</spring.version>
         <spring-data-jpa.version>1.11.6.RELEASE</spring-data-jpa.version>
         <spring-security.version>4.2.3.RELEASE</spring-security.version>
-        <jackson-json.version>2.9.0</jackson-json.version>
+        <jackson-json.version>2.9.1</jackson-json.version>
 
         <!-- Logging -->
         <logback.version>1.2.3</logback.version>
@@ -56,7 +56,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.6.2</version>
+                <version>3.7.0</version>
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
