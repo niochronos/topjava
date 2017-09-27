@@ -13,7 +13,7 @@ function enable(chkbox, id) {
         data: "enabled=" + enabled,
         success: function () {
             chkbox.closest("tr").toggleClass("disabled");
-            successNoty(enabled ? "Enabled" : "Disabled");
+            successNoty(enabled ? "common.enabled" : "common.disabled");
         },
         error: function () {
             $(chkbox).prop("checked", !enabled);
