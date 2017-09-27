@@ -4,8 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDateTime;
 
-public class MealWithExceed {
-    private final Integer id;
+public class MealWithExceed extends BaseTo {
 
     private final LocalDateTime dateTime;
 
@@ -20,15 +19,11 @@ public class MealWithExceed {
                           @JsonProperty("description") String description,
                           @JsonProperty("calories") int calories,
                           @JsonProperty("exceed") boolean exceed) {
-        this.id = id;
+        super(id);
         this.dateTime = dateTime;
         this.description = description;
         this.calories = calories;
         this.exceed = exceed;
-    }
-
-    public Integer getId() {
-        return id;
     }
 
     public LocalDateTime getDateTime() {
