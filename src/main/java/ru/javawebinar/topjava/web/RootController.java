@@ -30,9 +30,7 @@ public class RootController {
     }
 
     @GetMapping("/meals")
-    public String meals(Model model) {
-        model.addAttribute("meals",
-                MealsUtil.getWithExceeded(mealService.getAll(AuthorizedUser.id()), AuthorizedUser.getCaloriesPerDay()));
+    public String meals() {
         return "meals";
     }
 }
