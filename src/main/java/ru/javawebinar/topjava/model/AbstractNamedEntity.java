@@ -1,9 +1,8 @@
 package ru.javawebinar.topjava.model;
 
-import org.hibernate.validator.constraints.NotBlank;
-
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
+import javax.validation.constraints.NotBlank;
 
 
 @MappedSuperclass

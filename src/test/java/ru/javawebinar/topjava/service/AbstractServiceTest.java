@@ -19,6 +19,7 @@ import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import ru.javawebinar.topjava.ActiveDbProfileResolver;
 import ru.javawebinar.topjava.Profiles;
+import ru.javawebinar.topjava.util.ValidationUtil;
 
 import java.util.concurrent.TimeUnit;
 
@@ -79,18 +80,8 @@ abstract public class AbstractServiceTest {
             runnable.run();
             Assert.fail("Expected " + exceptionClass.getName());
         } catch (Exception e) {
-            Assert.assertThat(getRootCause(e), instanceOf(exceptionClass));
+            Assert.assertThat(ValidationUtil.getRootCause(e), instanceOf(exceptionClass));
         }
     }
 
-    //  http://stackoverflow.com/a/28565320/548473
-    public static Throwable getRootCause(Throwable t) {
-        Throwable result = t;
-        Throwable cause;
-
-        while (null != (cause = result.getCause()) && (result != cause)) {
-            result = cause;
-        }
-        return result;
-    }
 }
