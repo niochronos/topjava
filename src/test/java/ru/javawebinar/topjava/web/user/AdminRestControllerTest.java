@@ -97,17 +97,16 @@ public class AdminRestControllerTest extends AbstractControllerTest {
 
     @Test
     public void testCreate() throws Exception {
-        User expected = new User(null, "New", "new@gmail.com", "newPass", 2300, Role.ROLE_USER, Role.ROLE_ADMIN);
         ResultActions action = mockMvc.perform(post(REST_URL)
                 .contentType(MediaType.APPLICATION_JSON)
                 .with(userHttpBasic(ADMIN))
-                .content(JsonUtil.writeValue(expected))).andExpect(status().isCreated());
+                .content(JSON_NEW_USER_WITH_PASSWORD)).andExpect(status().isCreated());
 
         User returned = MATCHER.fromJsonAction(action);
-        expected.setId(returned.getId());
+        NEW_USER.setId(returned.getId());
 
-        MATCHER.assertEquals(expected, returned);
-        MATCHER.assertListEquals(Arrays.asList(ADMIN, expected, USER), userService.getAll());
+        MATCHER.assertEquals(NEW_USER, returned);
+        MATCHER.assertListEquals(Arrays.asList(ADMIN, NEW_USER, USER), userService.getAll());
     }
 
     @Test
