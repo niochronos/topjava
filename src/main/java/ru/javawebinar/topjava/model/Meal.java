@@ -10,7 +10,6 @@ import ru.javawebinar.topjava.util.DateTimeUtil;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.groups.Default;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -32,23 +31,23 @@ public class Meal extends AbstractBaseEntity {
     public static final String GET_BETWEEN = "Meal.getBetween";
 
     @Column(name = "date_time", nullable = false)
-    @NotNull(groups = {View.ValidatedUI.class, Default.class})
+    @NotNull
     @DateTimeFormat(pattern = DateTimeUtil.DATE_TIME_PATTERN)
     private LocalDateTime dateTime;
 
     @Column(name = "description", nullable = false)
-    @NotBlank(groups = {View.ValidatedUI.class, Default.class})
+    @NotBlank
     private String description;
 
     @Column(name = "calories", nullable = false)
-    @Range(min = 10, max = 5000, groups = {View.ValidatedUI.class, Default.class})
-    @NotNull(groups = {View.ValidatedUI.class, Default.class})
+    @Range(min = 10, max = 5000)
+    @NotNull
     private Integer calories;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @NotNull
+    @NotNull(groups = View.Persist.class)
     private User user;
 
     public Meal() {
