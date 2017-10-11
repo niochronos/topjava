@@ -46,9 +46,8 @@ public class JsonUtilTest {
         String json = JsonUtil.writeValue(UserTestData.USER);
         System.out.println(json);
         assertThat(json, not(containsString("password")));
-        User user = JsonUtil.readValue(
-                UserTestData.JSON_NEW_USER_WITH_PASSWORD, User.class);
-        System.out.println(user.getPassword());
-        Assert.assertNotNull(user.getPassword());
+        String jsonWithPassw = UserTestData.jsonWithPassword(UserTestData.USER, "newPassw");
+        User user = JsonUtil.readValue(jsonWithPassw, User.class);
+        Assert.assertEquals(user.getPassword(), "newPassw");
     }
 }

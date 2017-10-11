@@ -4,10 +4,10 @@ import org.junit.Test;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
 import ru.javawebinar.topjava.TestUtil;
+import ru.javawebinar.topjava.UserTestData;
 import ru.javawebinar.topjava.model.Role;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.web.AbstractControllerTest;
-import ru.javawebinar.topjava.web.json.JsonUtil;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -82,6 +82,9 @@ public class AdminRestControllerTest extends AbstractControllerTest {
     }
 
     @Test
+//    https://stackoverflow.com/a/46415060/548473
+//    @Transactional(propagation = Propagation.NEVER)
+//    @Commit
     public void testUpdate() throws Exception {
         User updated = new User(USER);
         updated.setName("UpdatedName");
@@ -89,7 +92,8 @@ public class AdminRestControllerTest extends AbstractControllerTest {
         mockMvc.perform(put(REST_URL + USER_ID)
                 .contentType(MediaType.APPLICATION_JSON)
                 .with(userHttpBasic(ADMIN))
-                .content(JsonUtil.writeValue(updated)))
+//                .content(JsonUtil.writeValue(updated)))
+                .content(UserTestData.jsonWithPassword(updated, "password")))
                 .andExpect(status().isOk());
 
         MATCHER.assertEquals(updated, userService.get(USER_ID));
@@ -97,16 +101,17 @@ public class AdminRestControllerTest extends AbstractControllerTest {
 
     @Test
     public void testCreate() throws Exception {
+        User newUser = new User(null, "New", "new@gmail.com", "newPass", 2300, Role.ROLE_USER, Role.ROLE_ADMIN);
         ResultActions action = mockMvc.perform(post(REST_URL)
                 .contentType(MediaType.APPLICATION_JSON)
                 .with(userHttpBasic(ADMIN))
-                .content(JSON_NEW_USER_WITH_PASSWORD)).andExpect(status().isCreated());
+                .content(jsonWithPassword(newUser, "newPass"))).andExpect(status().isCreated());
 
         User returned = MATCHER.fromJsonAction(action);
-        NEW_USER.setId(returned.getId());
+        newUser.setId(returned.getId());
 
-        MATCHER.assertEquals(NEW_USER, returned);
-        MATCHER.assertListEquals(Arrays.asList(ADMIN, NEW_USER, USER), userService.getAll());
+        MATCHER.assertEquals(newUser, returned);
+        MATCHER.assertListEquals(Arrays.asList(ADMIN, newUser, USER), userService.getAll());
     }
 
     @Test
