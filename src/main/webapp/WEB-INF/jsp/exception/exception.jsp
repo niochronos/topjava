@@ -9,10 +9,10 @@
 <jsp:include page="../fragments/bodyHeader.jsp"/>
 
 <div class="jumbotron">
-    <div class="container">
+    <div class="container text-center">
         <br>
-        <h2 class="text-center"><spring:message code="common.appError"/></h2>
-        <h3>${message}</h3>
+        <h3><spring:message code="common.appError"/></h3>
+        <h2>${message}</h2>
     </div>
 </div>
 <!--

@@ -12,11 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 
 @ControllerAdvice
 public class GlobalControllerExceptionHandler {
-    private static final Logger LOG = LoggerFactory.getLogger(GlobalControllerExceptionHandler.class);
+    private static final Logger log = LoggerFactory.getLogger(GlobalControllerExceptionHandler.class);
 
     @ExceptionHandler(Exception.class)
     public ModelAndView defaultErrorHandler(HttpServletRequest req, Exception e) throws Exception {
-        LOG.error("Exception at request " + req.getRequestURL(), e);
+        log.error("Exception at request " + req.getRequestURL(), e);
         ModelAndView mav = new ModelAndView("exception/exception");
         Throwable rootCause = ValidationUtil.getRootCause(e);
         mav.addObject("exception", rootCause);
