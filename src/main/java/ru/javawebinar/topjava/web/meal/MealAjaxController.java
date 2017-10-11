@@ -1,6 +1,5 @@
 package ru.javawebinar.topjava.web.meal;
 
-import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -22,14 +21,12 @@ public class MealAjaxController extends AbstractMealController {
 
     @Override
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    @JsonView(View.JsonUI.class)
     public List<MealWithExceed> getAll() {
         return super.getAll();
     }
 
     @Override
     @GetMapping(value = "/{id}")
-    @JsonView(View.JsonUI.class)
     public Meal get(@PathVariable("id") int id) {
         return super.get(id);
     }
@@ -56,7 +53,6 @@ public class MealAjaxController extends AbstractMealController {
 
     @Override
     @PostMapping(value = "/filter", produces = MediaType.APPLICATION_JSON_VALUE)
-    @JsonView(View.JsonUI.class)
     public List<MealWithExceed> getBetween(
             @RequestParam(value = "startDate", required = false) LocalDate startDate,
             @RequestParam(value = "startTime", required = false) LocalTime startTime,

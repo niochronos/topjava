@@ -1,11 +1,9 @@
 package ru.javawebinar.topjava.web.json;
 
-import com.fasterxml.jackson.databind.ObjectWriter;
 import org.junit.Assert;
 import org.junit.Test;
 import ru.javawebinar.topjava.MealTestData;
 import ru.javawebinar.topjava.UserTestData;
-import ru.javawebinar.topjava.View;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.model.User;
 
@@ -33,6 +31,7 @@ public class JsonUtilTest {
         MealTestData.MATCHER.assertListEquals(MealTestData.MEALS, meals);
     }
 
+/*
     @Test
     public void testWriteWithView() throws Exception {
         ObjectWriter uiWriter = JacksonObjectMapper.getMapper().writerWithView(View.JsonUI.class);
@@ -40,6 +39,7 @@ public class JsonUtilTest {
         System.out.println(json);
         assertThat(json, containsString("dateTimeUI"));
     }
+*/
 
     @Test
     public void testWriteOnlyAccess() throws Exception {
