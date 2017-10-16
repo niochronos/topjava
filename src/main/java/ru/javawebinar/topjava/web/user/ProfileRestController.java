@@ -1,12 +1,12 @@
 package ru.javawebinar.topjava.web.user;
 
 import org.springframework.http.MediaType;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.javawebinar.topjava.AuthorizedUser;
+import ru.javawebinar.topjava.View;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.to.UserTo;
-
-import javax.validation.Valid;
 
 @RestController
 @RequestMapping(ProfileRestController.REST_URL)
@@ -24,7 +24,7 @@ public class ProfileRestController extends AbstractUserController {
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void update(@Valid @RequestBody UserTo userTo) {
+    public void update(@Validated(View.ValidatedRestUI.class) @RequestBody UserTo userTo) {
         super.update(userTo, AuthorizedUser.id());
     }
 
