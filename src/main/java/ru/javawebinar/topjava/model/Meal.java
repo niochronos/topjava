@@ -11,6 +11,7 @@ import ru.javawebinar.topjava.util.DateTimeUtil;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -38,6 +39,7 @@ public class Meal extends AbstractBaseEntity {
 
     @Column(name = "description", nullable = false)
     @NotBlank
+    @Size(min = 2, max = 120)
     @SafeHtml(groups = {View.ValidatedRestUI.class})
     private String description;
 
