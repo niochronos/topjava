@@ -16,7 +16,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <tomcat.version>8.5.20</tomcat.version>
+        <tomcat.version>8.5.23</tomcat.version>
         <spring.version>4.3.10.RELEASE</spring.version>
         <spring-data-jpa.version>1.11.6.RELEASE</spring-data-jpa.version>
         <spring-security.version>4.2.3.RELEASE</spring-security.version>
@@ -420,7 +420,7 @@
                                         <artifactItem>
                                             <groupId>com.github.jsimone</groupId>
                                             <artifactId>webapp-runner</artifactId>
-                                            <version>8.5.11.2</version>
+                                            <version>8.5.23.0</version>
                                             <destFileName>webapp-runner.jar</destFileName>
                                         </artifactItem>
                                     </artifactItems>
