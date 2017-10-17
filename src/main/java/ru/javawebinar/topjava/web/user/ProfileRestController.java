@@ -1,6 +1,7 @@
 package ru.javawebinar.topjava.web.user;
 
 import org.springframework.http.MediaType;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.javawebinar.topjava.AuthorizedUser;
@@ -14,18 +15,18 @@ public class ProfileRestController extends AbstractUserController {
     static final String REST_URL = "/rest/profile";
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public User get() {
-        return super.get(AuthorizedUser.id());
+    public User get(@AuthenticationPrincipal AuthorizedUser authorizedUser) {
+        return super.get(authorizedUser.getId());
     }
 
     @DeleteMapping
-    public void delete() {
-        super.delete(AuthorizedUser.id());
+    public void delete(@AuthenticationPrincipal AuthorizedUser authorizedUser) {
+        super.delete(authorizedUser.getId());
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void update(@Validated(View.ValidatedRestUI.class) @RequestBody UserTo userTo) {
-        super.update(userTo, AuthorizedUser.id());
+    public void update(@Validated(View.ValidatedRestUI.class) @RequestBody UserTo userTo, @AuthenticationPrincipal AuthorizedUser authorizedUser) {
+        super.update(userTo, authorizedUser.getId());
     }
 
     @GetMapping(value = "/text")
